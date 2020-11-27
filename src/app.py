@@ -8,6 +8,7 @@ app = Flask(__name__)
 def format_server_time():
     server_time = time.localtime()
     return time.strftime("%I:%M:%S %p", server_time)
+
 @app.route("/")
 def home():
     context = { "server_time": format_server_time() }
