@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, make_response
 import os
 import time
 
@@ -12,7 +12,10 @@ def format_server_time():
 @app.route("/")
 def home():
     context = { "server_time": format_server_time() }
-    return render_template('index.html', context=context)
+    template = render_template('index.html', context=context)
+    response = make_response(template)
+    response.headers['Cache-Control'] = 'public, max-age=300, s-maxage=600'
+    return response
 
 
 if __name__=='__main__':
